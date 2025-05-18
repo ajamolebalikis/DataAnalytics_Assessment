@@ -162,9 +162,21 @@ ORDER BY estimated_clv DESC;
 
 ## Challenges Encountered
 
-- **MySQL Version Compatibility:** Certain features like window functions (`OVER`) required rewriting for MySQL 5.7 using subqueries instead.
-- **Schema Inference:** Column names like `created_on` vs `created_at`, and `amount` vs `confirmed_amount`, required checking the actual schema.
-- **Data Units:** All amount values were in `kobo`, requiring conversion to `naira` for clarity and accuracy.
+While working on this assessment, I encountered a few challenges that required careful adjustments:
+
+- **Column Name Mismatches:**  
+  Some of the column names mentioned in the instructions (like `confirmed_amount` and `created_at`) didn't exist in the actual tables. After inspecting the schema, I replaced them with the correct fields such as `amount` and `created_on`.
+
+- **SQL Compatibility Issues:**  
+  Initially, I used Common Table Expressions (CTEs) and window functions to keep the queries clean and modular. However, I later realized these features aren’t supported in MySQL 5.7, so I refactored the queries using subqueries to ensure broader compatibility.
+
+- **Clarifying Product Type Columns:**  
+  The product types (`savings` vs `investment`) were indicated by flags like `is_regular_savings` and `is_a_fund`, but it wasn’t immediately clear which tables those belonged to. I reviewed the schema and updated the logic accordingly to ensure the conditions were applied to the correct tables.
+
+- **Currency Conversion:**  
+  Since all financial values were stored in kobo, I had to consistently divide these amounts by 100 to convert them to naira for accurate reporting.
+
+Despite these minor challenges, the experience was smooth and allowed me to demonstrate adaptability and attention to detail when working with real-world data.
 
 ---
 
